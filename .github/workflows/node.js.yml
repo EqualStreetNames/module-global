@@ -17,12 +17,19 @@ jobs:
         node-version: [16.x, 18.x]
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: EqualStreetNames/equalstreetnames
+      - uses: actions/checkout@v3
+        with:
+          path: equalstreetnames/global
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+        working-directory: equalstreetnames/global
       - run: npm run build
+        working-directory: equalstreetnames/global
 
   lint:
     runs-on: ubuntu-latest
