@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: EqualStreetNames/equalstreetnames
+          submodules: true
       - uses: actions/checkout@v3
         with:
           path: global
