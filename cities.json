@@ -61,6 +61,10 @@
     "tallinn": {
       "name": "🇪🇪 Tallinn, Estonia",
       "url": "https://tallinn.equalstreetnames.eu/"
+    },
+    "tartu": {
+      "name": "🇪🇪 Tartu, Estonia",
+      "url": "https://tartu.equalstreetnames.eu/"
     }
   },
   "france": {
