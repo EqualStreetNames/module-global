@@ -135,6 +135,12 @@
       "url": "https://luxembourg.equalstreetnames.eu/"
     }
   },
+  "montenegro": {
+    "tivat": {
+      "name": "🇲🇪 Tivat, Montenegro",
+      "url": "https://tivat.equalstreetnames.eu/"
+    }
+  },
   "netherlands": {
     "assen": {
       "name": "🇳🇱 Assen, The Netherlands",
