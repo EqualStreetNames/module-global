@@ -16,7 +16,7 @@
     "@types/ol": "^6.5.3",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
-    "commander": "^9.3.0",
+    "commander": "^9.4.1",
     "eslint": "^8.24.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
@@ -34,6 +34,6 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
-    "ol": "^6.14.1"
+    "ol": "^7.1.0"
   }
 }
