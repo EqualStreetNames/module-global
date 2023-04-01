@@ -16,7 +16,7 @@
     "@types/ol": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.42.0",
-    "commander": "^9.4.1",
+    "commander": "^10.0.0",
     "eslint": "^8.37.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
