@@ -1,4 +1,10 @@
 {
+  "australia": {
+    "vienna": {
+      "name": "🇦🇺 Fremantle, Australia",
+      "url": "https://fremantle.equalstreetnames.org/"
+    }
+  },
   "austria": {
     "vienna": {
       "name": "🇦🇹 Vienna, Austria",
