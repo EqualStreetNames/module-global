@@ -151,6 +151,12 @@
       "url": "https://athens.equalstreetnames.eu/"
     }
   },
+  "hungary": {
+    "budapest": {
+      "name": "🇭🇺 Budapest, Hungary",
+      "url": "https://budapest.equalstreetnames.eu/"
+    }
+  },
   "italy": {
     "bolzano": {
       "name": "🇮🇹 Bolzano, Italy",
