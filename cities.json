@@ -145,6 +145,12 @@
       "url": "https://wiesbaden.equalstreetnames.eu/"
     }
   },
+  "greece": {
+    "athens": {
+      "name": "🇬🇷 Athens, Greece",
+      "url": "https://athens.equalstreetnames.eu/"
+    }
+  },
   "italy": {
     "bolzano": {
       "name": "🇮🇹 Bolzano, Italy",
