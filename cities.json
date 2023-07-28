@@ -67,6 +67,12 @@
       "url": "https://roeselare.equalstreetnames.be/"
     }
   },
+  "denmark": {
+    "copenhagen": {
+      "name": "🇩🇰 Copenhagen, Denmark",
+      "url": "https://copenhagen.equalstreetnames.eu/"
+    }
+  },
   "estonia": {
     "tallinn": {
       "name": "🇪🇪 Tallinn, Estonia",
