@@ -84,6 +84,10 @@
     }
   },
   "france": {
+    "paris": {
+      "name": "🇫🇷 Paris, France",
+      "url": "https://paris.equalstreetnames.eu/"
+    },
     "saint-brieuc": {
       "name": "🇫🇷 Saint-Brieuc, France",
       "url": "https://saint-brieuc.equalstreetnames.eu/"
