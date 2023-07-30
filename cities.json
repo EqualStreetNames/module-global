@@ -215,6 +215,12 @@
       "url": "https://wroclaw.equalstreetnames.eu/"
     }
   },
+  "portugal": {
+    "lisbon": {
+      "name": "🇵🇹 Lisbon, Portugal",
+      "url": "https://lisbon.equalstreetnames.eu/"
+    }
+  },
   "serbia": {
     "belgrade": {
       "name": "🇷🇸 Belgrade, Serbia",
