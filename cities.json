@@ -225,6 +225,12 @@
       "url": "https://lisbon.equalstreetnames.eu/"
     }
   },
+  "romania": {
+    "bucharest": {
+      "name": "🇷🇴 Bucharest, Romania",
+      "url": "https://bucharest.equalstreetnames.eu/"
+    }
+  },
   "serbia": {
     "belgrade": {
       "name": "🇷🇸 Belgrade, Serbia",
