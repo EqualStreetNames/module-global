@@ -25,7 +25,7 @@
     "parcel": "^2.8.3",
     "sass": "^1.62.1",
     "shelljs": "^0.8.5",
-    "typescript": "^5.0.4"
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "build": "node build.js",
