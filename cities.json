@@ -78,6 +78,10 @@
     }
   },
   "estonia": {
+    "narva": {
+      "name": "🇪🇪 Narva, Estonia",
+      "url": "https://narva.equalstreetnames.eu/"
+    },
     "tallinn": {
       "name": "🇪🇪 Tallinn, Estonia",
       "url": "https://tallinn.equalstreetnames.eu/"
