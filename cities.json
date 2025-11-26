@@ -265,6 +265,10 @@
     "madrid": {
       "name": "🇪🇸 Madrid, Spain",
       "url": "https://madrid.equalstreetnames.eu/"
+    },
+    "malaga": {
+      "name": "🇪🇸 Málaga, Spain",
+      "url": "https://malaga.equalstreetnames.eu/"
     }
   },
   "switzerland": {
