@@ -293,6 +293,12 @@
       "url": "https://zurich.equalstreetnames.eu/"
     }
   },
+  "thailand": {
+    "bangkok": {
+      "name": "🇹🇭 Bangkok, Thailand",
+      "url": "https://bangkok.equalstreetnames.org/"
+    }
+  },
   "united-kingdom": {
     "chester-le-street": {
       "name": "🇬🇧 Chester-le-Street, United Kingdom",
