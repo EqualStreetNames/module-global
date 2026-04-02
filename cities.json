@@ -92,6 +92,10 @@
     }
   },
   "france": {
+    "bayonne": {
+      "name": "🇫🇷 Bayonne, France",
+      "url": "https://bayonne.equalstreetnames.eu/"
+    },
     "crest": {
       "name": "🇫🇷 Crest, France",
       "url": "https://crest.equalstreetnames.eu/"
