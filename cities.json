@@ -92,6 +92,10 @@
     }
   },
   "france": {
+    "crest": {
+      "name": "🇫🇷 Crest, France",
+      "url": "https://crest.equalstreetnames.eu/"
+    },
     "paris": {
       "name": "🇫🇷 Paris, France",
       "url": "https://paris.equalstreetnames.eu/"
