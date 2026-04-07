@@ -1,16 +1,65 @@
 'use strict';
 
-import { Map, Overlay, View } from 'ol';
-import GeoJSON from 'ol/format/GeoJSON';
-import TileLayer from 'ol/layer/Tile';
-import VectorLayer from 'ol/layer/Vector';
-import OSM from 'ol/source/OSM';
-import VectorSource from 'ol/source/Vector';
-import { Fill, Stroke, Circle, Style } from 'ol/style';
+import { Map } from 'maplibre-gl';
 
-import * as polygons from '../dist/cities.json';
-import * as points from '../dist/cities-point.json';
+import points from './cities-point.json';
+import polygons from './cities.json';
+// console.log(polygons, points);
 
+document.getElementById('count').innerText = polygons.features.length.toString() ?? '??';
+
+const map = new Map({
+  container: 'map',
+  style: 'https://tiles.openfreemap.org/styles/bright',
+  center: [0, 0],
+  zoom: 2
+});
+
+map.on('load', () => {
+  map.addSource('polygons', {
+    type: 'geojson',
+    data: polygons
+  });
+
+  map.addLayer({
+    'id': 'polygons',
+    'type': 'fill',
+    'source': 'polygons',
+    'paint': {
+      'fill-color': '#FFFFFF',
+      'fill-opacity': 0.4
+    },
+  });
+  map.addLayer({
+    'id': 'polygons-border',
+    'type': 'line',
+    'source': 'polygons',
+    'paint': {
+      'line-color': '#3399CC',
+      'line-width': 2
+    },
+  });
+
+  map.addSource('points', {
+    type: 'geojson',
+    data: points
+  });
+
+  map.addLayer({
+    'id': 'points',
+    'type': 'circle',
+    'source': 'points',
+    'paint': {
+      'circle-color': '#3399CC',
+      'circle-radius': 8,
+      'circle-stroke-width': 3,
+      'circle-stroke-color': '#FFFFFF'
+    }
+  });
+});
+
+
+/**
 (function () {
   document.getElementById('count').innerText = polygons.features.length.toString();
 
@@ -104,3 +153,4 @@ import * as points from '../dist/cities-point.json';
 
   map.updateSize();
 })();
+*/
