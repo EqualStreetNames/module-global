@@ -1,106 +1,116 @@
 'use strict';
 
-import { Map, Overlay, View } from 'ol';
-import GeoJSON from 'ol/format/GeoJSON';
-import TileLayer from 'ol/layer/Tile';
-import VectorLayer from 'ol/layer/Vector';
-import OSM from 'ol/source/OSM';
-import VectorSource from 'ol/source/Vector';
-import { Fill, Stroke, Circle, Style } from 'ol/style';
+import { LngLatLike, Map, Popup } from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import points from './cities-point.json';
+import polygons from './cities.json';
 
-import * as polygons from '../dist/cities.json';
-import * as points from '../dist/cities-point.json';
+const countElement = document.getElementById('count');
+if (typeof countElement !== 'undefined' && countElement !== null) {
+  countElement.innerText = polygons.features.length.toString() ?? '??';
+}
 
-(function () {
-  document.getElementById('count').innerText = polygons.features.length.toString();
+const map = new Map({
+  container: 'map',
+  style: 'https://tiles.openfreemap.org/styles/bright',
+});
 
-  const baselayer = new TileLayer({
-    source: new OSM()
+map.on('load', () => {
+  // Add polygons.
+  map.addSource('polygons', {
+    type: 'geojson',
+    data: polygons as GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon>,
+  });
+  map.addLayer({
+    id: 'polygons',
+    type: 'fill',
+    source: 'polygons',
+    paint: {
+      'fill-color': '#FFFFFF',
+      'fill-opacity': 0.4
+    },
+    minzoom: 8,
+  });
+  map.addLayer({
+    id: 'polygons-border',
+    type: 'line',
+    source: 'polygons',
+    paint: {
+      'line-color': '#3399CC',
+      'line-width': 2
+    },
+    minzoom: 8,
   });
 
-  const map = new Map({
-    layers: [baselayer],
-    target: 'map',
-    view: new View({
-      center: [0, 0],
-      zoom: 2
-    })
+  // Add points.
+  map.addSource('points', {
+    type: 'geojson',
+    data: points as GeoJSON.FeatureCollection<GeoJSON.Point | GeoJSON.MultiPoint>,
+  });
+  map.addLayer({
+    id: 'points',
+    type: 'circle',
+    source: 'points',
+    paint: {
+      'circle-color': '#3399CC',
+      'circle-radius': 8,
+      'circle-stroke-width': 3,
+      'circle-stroke-color': '#FFFFFF'
+    },
+    maxzoom: 8,
   });
 
-  const layerPolygons = new VectorLayer({
-    source: new VectorSource({
-      features: new GeoJSON({ featureProjection: map.getView().getProjection() }).readFeatures(polygons)
-    }),
-    minZoom: 8,
-    style: new Style({
-      fill: new Fill({
-        color: 'rgba(255,255,255,0.4)'
-      }),
-      stroke: new Stroke({
-        color: '#3399CC',
-        width: 2
-      })
-    })
+  // Change the cursor to a pointer when the mouse is over the layer.
+  map.on('mouseenter', ['polygons', 'points'], () => {
+    map.getCanvas().style.cursor = 'pointer';
   });
-  map.addLayer(layerPolygons);
 
-  const layerPoints = new VectorLayer({
-    source: new VectorSource({
-      features: new GeoJSON({ featureProjection: map.getView().getProjection() }).readFeatures(points)
-    }),
-    maxZoom: 8,
-    style: new Style({
-      image: new Circle({
-        fill: new Fill({
-          color: '#3399CC'
-        }),
-        stroke: new Stroke({
-          color: '#FFFFFF',
-          width: 3
-        }),
-        radius: 8
-      })
-    })
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', ['polygons', 'points'], () => {
+    map.getCanvas().style.cursor = '';
   });
-  map.addLayer(layerPoints);
 
-  map.getView().fit(layerPolygons.getSource().getExtent(), { padding: [100, 100, 100, 100] });
-
-  const overlay = new Overlay({
-    element: document.getElementById('popup'),
-    autoPan: true,
-    autoPanAnimation: {
-      duration: 250
+  // When a click event occurs on a feature in the layer, open a popup at the
+  // location of the feature, with description HTML from its properties.
+  map.on('click', ['polygons', 'points'], (event) => {
+    if (event.features === undefined || event.features.length === 0) {
+      return;
     }
-  });
-  map.addOverlay(overlay);
 
-  map.on('singleclick', (event) => {
-    const features = map.getFeaturesAtPixel(event.pixel);
+    let coordinates = event.lngLat as LngLatLike;
 
-    if (features.length > 0) {
-      const { name, url, statistics } = features[0].getProperties();
+    // If the feature is a point, use its coordinates for the popup.
+    if (event.features[0].geometry.type === 'Point') {
+      coordinates = event.features[0].geometry.coordinates.slice() as [number, number];
 
-      const total = Object.values(statistics).reduce((a, b) => a + b, 0);
-      const totalPerson = total - statistics['-'];
-
-      let html = `${name}<br><a target="_blank" href="${url}">${url}</a>`;
-      html += '<hr>';
-      html += '<div style="font-size: small;">' +
-        `Out of ${total} streetnames,<br>${totalPerson} have been found to be named after a person :<br>` +
-        (statistics.F > 0 ? `${statistics.F} after a cisgender female,<br>` : '') +
-        (statistics.FX > 0 ? `${statistics.FX} after a transgender female,<br>` : '') +
-        (statistics.MX > 0 ? `${statistics.MX} after a transgender male,<br>` : '') +
-        (statistics.M > 0 ? `${statistics.M} after a cisgender male,<br>` : '') +
-        '</div>';
-
-      overlay.getElement().innerHTML = html;
-
-      overlay.setPosition(event.coordinate);
-    } else {
-      overlay.setPosition(undefined);
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
     }
-  });
 
-  map.updateSize();
-})();
+    const { name, url, statistics } = event.features[0].properties as { name: string; url: string; statistics: string };
+    const stats = JSON.parse(statistics) as Record<string, number>;
+
+    const total = Object.values(stats).reduce((a, b) => a + b, 0);
+    const totalPerson = total - stats['-'];
+
+    const html = `${name}<br><a target="_blank" href="${url}">${url}</a>` +
+      '<div style="border-top: 1px solid #000; font-size: small; padding-top: 5px; margin-top: 5px; white-space: nowrap;">' +
+      `Out of ${total} streetnames,<br>${totalPerson} have been found to be named after a person :` +
+      '<ul style="margin: 0; padding-left: 15px;">' +
+      (stats.F > 0 ? `<li>${stats.F} after a cisgender female</li>` : '') +
+      (stats.FX > 0 ? `<li>${stats.FX} after a transgender female</li>` : '') +
+      (stats.MX > 0 ? `<li>${stats.MX} after a transgender male</li>` : '') +
+      (stats.M > 0 ? `<li>${stats.M} after a cisgender male</li>` : '') +
+      '</ul>' +
+      '</div>';
+
+    new Popup({ maxWidth: 'none' })
+      .setLngLat(coordinates)
+      .setHTML(html)
+      .addTo(map);
+  });
+});
