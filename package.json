@@ -24,7 +24,7 @@
     "typescript-eslint": "^8.58.1"
   },
   "scripts": {
-    "build": "node build.js",
+    "build": "node build.cjs",
     "parcel:build": "parcel build src/index.html",
     "parcel:serve": "parcel serve src/index.html",
     "eslint": "eslint src/**/*.{css,ts} cities.json",

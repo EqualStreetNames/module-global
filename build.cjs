@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
-const program = require('commander');
+const { program } = require('commander');
 const turf = require('@turf/turf');
 
 const version = require('./package.json').version;
@@ -100,12 +100,12 @@ async function bundle (options) {
     shell.mkdir('dist/');
 
     fs.writeFileSync(
-      path.resolve('./dist/cities.json'),
+      path.resolve('./src/cities.json'),
       JSON.stringify(polygons),
       'utf8'
     );
     fs.writeFileSync(
-      path.resolve('./dist/cities-point.json'),
+      path.resolve('./src/cities-point.json'),
       JSON.stringify(points),
       'utf8'
     );
