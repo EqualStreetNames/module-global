@@ -13,14 +13,12 @@
     "@eslint/css": "^1.1.0",
     "@eslint/js": "^10.0.1",
     "@eslint/json": "^1.2.0",
-    "@parcel/transformer-sass": "^2.16.4",
     "@parcel/transformer-typescript-tsc": "^2.16.4",
     "@turf/turf": "^7.3.4",
     "commander": "^14.0.3",
     "eslint": "^10.2.0",
     "globals": "^17.4.0",
     "parcel": "^2.16.4",
-    "sass": "^1.99.0",
     "shelljs": "^0.10.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1"
@@ -29,8 +27,8 @@
     "build": "node build.js",
     "parcel:build": "parcel build src/index.html",
     "parcel:serve": "parcel serve src/index.html",
-    "eslint": "eslint src/**/*.ts cities.json",
-    "eslint:fix": "eslint --fix src/**/*.ts cities.json"
+    "eslint": "eslint src/**/*.{css,ts} cities.json",
+    "eslint:fix": "eslint --fix src/**/*.{css,ts} cities.json"
   },
   "dependencies": {
     "maplibre-gl": "^5.22.0"

@@ -1,7 +1,7 @@
 'use strict';
 
 import { LngLatLike, Map, Popup } from 'maplibre-gl';
-
+import 'maplibre-gl/dist/maplibre-gl.css';
 import points from './cities-point.json';
 import polygons from './cities.json';
 
