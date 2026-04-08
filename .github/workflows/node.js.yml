@@ -40,4 +40,4 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: npm ci
-      - run: npm run lint --if-present
+      - run: npm run eslint --if-present
