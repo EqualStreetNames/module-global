@@ -7,7 +7,7 @@ import polygons from './cities.json';
 
 const countElement = document.getElementById('count');
 if (typeof countElement !== 'undefined' && countElement !== null) {
-  countElement.innerText = polygons.features.length.toString() ?? '??';
+  countElement.innerText = polygons.features.length.toString();
 }
 
 const map = new Map({
@@ -99,7 +99,7 @@ map.on('load', () => {
 
     const html = `${name}<br><a target="_blank" href="${url}">${url}</a>` +
       '<div style="border-top: 1px solid #000; font-size: small; padding-top: 5px; margin-top: 5px; white-space: nowrap;">' +
-      `Out of ${total} streetnames,<br>${totalPerson} have been found to be named after a person :` +
+      `Out of ${total} street names,<br>${totalPerson} have been found to be named after a person :` +
       '<ul style="margin: 0; padding-left: 15px;">' +
       (stats.F > 0 ? `<li>${stats.F} after a cisgender female</li>` : '') +
       (stats.FX > 0 ? `<li>${stats.FX} after a transgender female</li>` : '') +
