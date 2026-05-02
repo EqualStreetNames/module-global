@@ -31,6 +31,6 @@
     "eslint:fix": "eslint --fix src/**/*.{css,ts} cities.json"
   },
   "dependencies": {
-    "maplibre-gl": "^5.22.0"
+    "maplibre-gl": "^5.24.0"
   }
 }
