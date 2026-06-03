@@ -14,7 +14,7 @@
     "@eslint/js": "^10.0.1",
     "@eslint/json": "^2.0.0",
     "@parcel/transformer-typescript-tsc": "^2.16.4",
-    "@turf/turf": "^7.3.4",
+    "@turf/turf": "^7.3.5",
     "commander": "^14.0.3",
     "eslint": "^10.4.1",
     "globals": "^17.6.0",
