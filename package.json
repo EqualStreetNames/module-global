@@ -17,7 +17,7 @@
     "@turf/turf": "^7.3.5",
     "commander": "^14.0.3",
     "eslint": "^10.6.0",
-    "globals": "^17.6.0",
+    "globals": "^17.7.0",
     "parcel": "^2.16.4",
     "shelljs": "^0.10.0",
     "typescript": "^6.0.3",
