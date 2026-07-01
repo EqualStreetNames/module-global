@@ -21,7 +21,7 @@
     "parcel": "^2.16.4",
     "shelljs": "^0.10.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.60.1"
+    "typescript-eslint": "^8.62.1"
   },
   "scripts": {
     "build": "node build.cjs",
