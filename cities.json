@@ -251,6 +251,10 @@
     "lisbon": {
       "name": "🇵🇹 Lisbon, Portugal",
       "url": "https://lisbon.equalstreetnames.eu/"
+    },
+    "porto": {
+      "name": "🇵🇹 Porto, Portugal",
+      "url": "https://porto.equalstreetnames.eu/"
     }
   },
   "romania": {
