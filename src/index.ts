@@ -1,9 +1,11 @@
 'use strict';
 
-import { LngLatLike, Map, Popup } from 'maplibre-gl';
+import { LngLatLike, Map, Popup, setWorkerUrl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import points from './cities-point.json';
 import polygons from './cities.json';
+
+setWorkerUrl(new URL('../node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs', import.meta.url).toString());
 
 const countElement = document.getElementById('count');
 if (typeof countElement !== 'undefined' && countElement !== null) {
@@ -91,20 +93,19 @@ map.on('load', () => {
       }
     }
 
-    const { name, url, statistics } = event.features[0].properties as { name: string; url: string; statistics: string };
-    const stats = JSON.parse(statistics) as Record<string, number>;
+    const { name, url, statistics } = event.features[0].properties as { name: string; url: string; statistics: Record<string, number> };
 
-    const total = Object.values(stats).reduce((a, b) => a + b, 0);
-    const totalPerson = total - stats['-'];
+    const total = Object.values(statistics).reduce((a, b) => a + b, 0);
+    const totalPerson = total - statistics['-'];
 
     const html = `${name}<br><a target="_blank" href="${url}">${url}</a>` +
       '<div style="border-top: 1px solid #000; font-size: small; padding-top: 5px; margin-top: 5px; white-space: nowrap;">' +
       `Out of ${total} street names,<br>${totalPerson} have been found to be named after a person :` +
       '<ul style="margin: 0; padding-left: 15px;">' +
-      (stats.F > 0 ? `<li>${stats.F} after a cisgender female</li>` : '') +
-      (stats.FX > 0 ? `<li>${stats.FX} after a transgender female</li>` : '') +
-      (stats.MX > 0 ? `<li>${stats.MX} after a transgender male</li>` : '') +
-      (stats.M > 0 ? `<li>${stats.M} after a cisgender male</li>` : '') +
+      (statistics.F > 0 ? `<li>${statistics.F} after a cisgender female</li>` : '') +
+      (statistics.FX > 0 ? `<li>${statistics.FX} after a transgender female</li>` : '') +
+      (statistics.MX > 0 ? `<li>${statistics.MX} after a transgender male</li>` : '') +
+      (statistics.M > 0 ? `<li>${statistics.M} after a cisgender male</li>` : '') +
       '</ul>' +
       '</div>';
 
